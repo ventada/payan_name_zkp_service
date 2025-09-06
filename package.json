@@ -1,0 +1,47 @@
+{
+  "name": "zkflow-service",
+  "version": "0.1.0",
+  "private": true,
+  "description": "ZKFlow - Zero-Knowledge Proof generation service (Express + BullMQ + MongoDB + Redis + S3)",
+  "main": "server/index.js",
+  "type": "commonjs",
+  "scripts": {
+    "dev": "nodemon server/index.js",
+    "start": "node server/index.js",
+    "worker:keygen": "node server/workers/keyGenerationWorker.js",
+    "worker:proof": "node server/workers/proofGenerationWorker.js",
+    "worker:deploy": "node server/workers/deployWorker.js",
+    "worker:deployment": "node server/workers/deploymentWorker.js",
+    "worker:cleanup": "node server/workers/cleanupWorker.js",
+    "setup:ptau": "node tools/setupPowersOfTau.js",
+    "migrate:status": "node tools/migrateCircuitStatus.js",
+    "trigger:deploy": "node tools/triggerDeployment.js trigger",
+    "check:status": "node tools/triggerDeployment.js status",
+    "test:deployment": "node tools/testDeploymentFlow.js",
+    "test:api": "node tools/testDeploymentAPI.js",
+    "check:contract": "node tools/checkContractInfo.js",
+    "start:all": "concurrently \"npm run dev\" \"npm run worker:keygen\" \"npm run worker:proof\""
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.645.0",
+    "axios": "^1.11.0",
+    "bullmq": "^5.7.9",
+    "circomlib": "^2.0.5",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "ethers": "^6.13.2",
+    "express": "^4.19.2",
+    "ioredis": "^5.4.1",
+    "joi": "^17.12.0",
+    "mongoose": "^8.6.1",
+    "pino": "^9.4.0",
+    "prom-client": "^15.1.3",
+    "snarkjs": "^0.7.4",
+    "solc": "^0.8.26",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.0",
+    "nodemon": "^3.1.0"
+  }
+}
